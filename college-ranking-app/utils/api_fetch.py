@@ -3,7 +3,6 @@ import pandas as pd
 import os
 from dotenv import load_dotenv
 
-# Load API key
 load_dotenv()
 API_KEY = os.getenv("API_KEY")
 BASE_URL = "https://api.data.gov/ed/collegescorecard/v1/schools"
@@ -26,9 +25,9 @@ def fetch_college_data():
         return pd.DataFrame()
 
     data = response.json()
-    
-    # Debug: Print the full API response to verify structure
-    print("🔍 API Response:", data)
+
+    # Print API response keys to check structure
+    print("🔍 API Response Keys:", data.keys())
 
     if "results" not in data:
         print("❌ 'results' key missing in API response!")
@@ -36,7 +35,7 @@ def fetch_college_data():
 
     df = pd.DataFrame(data["results"])
 
-    # Debug: Print first row in Streamlit Cloud to check structure
-    print("✅ First Row in Streamlit:", df.iloc[0].to_dict())
+    # Print first row to confirm structure
+    print("✅ First Row in Streamlit Cloud:", df.iloc[0].to_dict())
 
     return df
