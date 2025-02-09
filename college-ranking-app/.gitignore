@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+venv/
+.env
+
+# Data
+data/preprocessed_college_data.csv
+
+# Deployment
+*.log
+*.sqlite3
+venv/
