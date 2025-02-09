@@ -20,20 +20,23 @@ def fetch_college_data():
 
     response = requests.get(BASE_URL, params=params)
 
-    # Check if request was successful
     if response.status_code != 200:
         print("❌ API Call Failed! Status:", response.status_code)
         print("Response:", response.text)
-        return pd.DataFrame()  # Return empty DataFrame to prevent crash
-
-    data = response.json()
-
-    # Debugging: Print API response to check structure
-    print("🔍 API Response:", data)
-
-    # Ensure 'results' key exists before accessing it
-    if "results" not in data:
-        print("❌ Error: 'results' key not found in API response!")
         return pd.DataFrame()
 
-    return pd.DataFrame(data["results"])
+    data = response.json()
+    
+    # Debug: Print the full API response to verify structure
+    print("🔍 API Response:", data)
+
+    if "results" not in data:
+        print("❌ 'results' key missing in API response!")
+        return pd.DataFrame()
+
+    df = pd.DataFrame(data["results"])
+
+    # Debug: Print first row in Streamlit Cloud to check structure
+    print("✅ First Row in Streamlit:", df.iloc[0].to_dict())
+
+    return df
